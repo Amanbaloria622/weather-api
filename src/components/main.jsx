@@ -46,6 +46,7 @@ export const Body = () => {
     <>
       <div id="inputbar">
         <input
+          className="input"
           type="text"
           placeholder=" Enter Location"
           value={Searchres}
@@ -56,26 +57,27 @@ export const Body = () => {
         <button
           onClick={() => {
             console.log(Searchres);
-            let fliterlist = Datalist.filter((products) => {
-              return products.location
+            let fliterlist = Datalist.filter((item) => {
+              return item.location
                 .toLowerCase()
-                .trim()
-                .includes(Searchres.toLowerCase());
+                .includes(Searchres.toLowerCase().trim());
             });
 
             setdata(fliterlist);
+            input.value = "";
           }}
         >
           Search
         </button>
       </div>
+
       <div className="maindiv">
-        {Datalist.map((data, index) => (
-          <div key={index} className="list">
-            <h2 className="location">{data.location}</h2>
-            <p>Time:{data.timestamp}</p>
-            <p>Moon Angle: {data.moon_angle}°</p>
-            <p>Visibility:{data.visibility}%</p>
+        {Data.map((item) => (
+          <div key={item.id} className="list">
+            <h2 className="location">{item.location}</h2>
+            <p>Time:{item.timestamp}</p>
+            <p>Moon Angle: {item.moon_angle}°</p>
+            <p>Visibility:{item.visibility}%</p>
           </div>
         ))}
       </div>
